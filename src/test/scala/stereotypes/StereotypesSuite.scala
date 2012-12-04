@@ -7,6 +7,7 @@ import org.scalatest.matchers.MustMatchers
 
 @RunWith(classOf[JUnitRunner])
 class StereotypesSuite extends FunSuite {
+  import scalaz.Validation._
 
   trait Examples extends Stereotypes with MustMatchers {
     val australia  = Stereotype("australia",  "a person from australia",   List("aussie", "legend"))
@@ -21,27 +22,28 @@ class StereotypesSuite extends FunSuite {
 
   test("find by description") {
     new Examples {
-      find("a person from new zealand").fold(fail(_), _ must equal(newZealand))
+      find("a person from new zealand") must be === success(newZealand)
     }
   }
 
   test("find by name") {
     new Examples {
-      find("manchester").fold(fail(_), _ must equal(manchester))
+      find("manchester") must be === success(manchester)
     }
   }
 
   test("find by alias") {
     new Examples {
-      find("scouser").fold(fail(_), _ must equal(liverpool))
+      find("scouser") must be === success(liverpool)
     }
   }
 
   test("find is case insensitive") {
     new Examples {
-      find("scally").fold(fail(_), _ must equal(preston))
-      find("SCALLY").fold(fail(_), _ must equal(preston))
-      find("ScAlLy").fold(fail(_), _ must equal(preston))
+      val expected = success(preston)
+      find("scally") must be === expected
+      find("SCALLY") must be === expected
+      find("ScAlLy") must be === expected
     }
   }
 

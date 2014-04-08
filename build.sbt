@@ -1,6 +1,6 @@
 name := "stereotypes-with-scalaz"
 
-scalaVersion := "2.10.0-RC5"
+scalaVersion := "2.10.4"
 
 resolvers ++= Seq(
   "Sonatype OSS Releases" at "http://oss.sonatype.org/content/repositories/releases/",
@@ -10,8 +10,8 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.scalaz" % "scalaz-core" % "7.0.0-M6" cross CrossVersion.full withSources(),
-  "org.scalatest" % "scalatest" % "2.0.M5-B1" % "test" cross CrossVersion.full withSources(),
+  "org.scalaz" %% "scalaz-core" % "7.0.6",
+  "org.scalatest" % "scalatest_2.10" % "2.1.3" % "test",
   "junit" % "junit" % "4.11" % "test"
 )
 

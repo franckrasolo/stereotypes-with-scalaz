@@ -3,7 +3,7 @@ package stereotypes
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.matchers.MustMatchers
+import org.scalatest.MustMatchers
 
 @RunWith(classOf[JUnitRunner])
 class StereotypesSuite extends FunSuite {
@@ -22,28 +22,27 @@ class StereotypesSuite extends FunSuite {
 
   test("find by description") {
     new Examples {
-      find("a person from new zealand") must be === success(newZealand)
+      find("a person from new zealand") mustBe success(newZealand)
     }
   }
 
   test("find by name") {
     new Examples {
-      find("manchester") must be === success(manchester)
+      find("manchester") mustBe success(manchester)
     }
   }
 
   test("find by alias") {
     new Examples {
-      find("scouser") must be === success(liverpool)
+      find("scouser") mustBe success(liverpool)
     }
   }
 
   test("find is case insensitive") {
     new Examples {
-      val expected = success(preston)
-      find("scally") must be === expected
-      find("SCALLY") must be === expected
-      find("ScAlLy") must be === expected
+      find("scally") mustBe success(preston)
+      find("SCALLY") mustBe success(preston)
+      find("ScAlLy") mustBe success(preston)
     }
   }
 
@@ -54,7 +53,7 @@ class StereotypesSuite extends FunSuite {
         "a person from preston, aussie, australia, fighter, kiwi, legend, liverpool, " +
         "manc, manchester, mancunian, newzealand, preston, scally, scouser, thief]"
 
-      find("Awesome").fold(_ must equal(error), unexpected => fail(s"Invalid Stereotype [Awesome]: $unexpected"))
+      find("Awesome").fold(_ mustBe error, unexpected => fail(s"Invalid Stereotype [Awesome]: $unexpected"))
     }
   }
 }
